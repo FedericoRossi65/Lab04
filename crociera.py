@@ -11,6 +11,7 @@ class Crociera:
         self.listaCabine = []
 
 
+
     """Aggiungere setter e getter se necessari"""
     # TODO
 
@@ -23,7 +24,7 @@ class Crociera:
                     if row[0].startswith('P'):
                         CodPasseggeri = row[0]
                         Nome = row[1]
-                        Cognome = [2]
+                        Cognome = row[2]
                         passeggero = passeggeri(CodPasseggeri, Nome, Cognome)
                         self.lista_passeggeri.append(passeggero)
                     elif row[0].startswith('C'):
@@ -31,20 +32,27 @@ class Crociera:
                         letti = int(row[1])
                         ponte = int(row[2])
                         prezzoBase = float(row[3])
-                        if row[4] is int:
-                            numAnimali = int(row[4])
+                        try:
 
-                            cab_animali = CabinaAnimali(CodCabina,letti,ponte,prezzoBase, numAnimali)
-                            self.listaCabine.append(cab_animali)
-                        else:
-                            stile_cabina = row[4]
-                            cabDeluxe = CabinaDeluxe(CodCabina,letti,ponte,prezzoBase, stile_cabina)
-                            self.listaCabine.append(cabDeluxe)
-                return self.lista_passeggeri, self.listaCabine
+
+                            if isinstance(row[4], int):
+                                numAnimali = int(row[4])
+
+                                cab_animali = CabinaAnimali(CodCabina,letti,ponte,prezzoBase, numAnimali)
+                                self.listaCabine.append(cab_animali)
+                            elif isinstance(row[4], str):
+                                stile_cabina = row[4]
+                                cabDeluxe = CabinaDeluxe(CodCabina,letti,ponte,prezzoBase, stile_cabina)
+                                self.listaCabine.append(cabDeluxe)
+                        except IndexError:
+                            cab = Cabina(CodCabina, letti, ponte, prezzoBase)
+                            self.listaCabine.append(cab)
+
+
+            return self.lista_passeggeri, self.listaCabine
         except FileNotFoundError:
             print("File non trovato")
-        except Exception:
-            print("Errore anomalo")
+
 
 
 
@@ -61,6 +69,4 @@ class Crociera:
     def elenca_passeggeri(self):
         """Stampa l'elenco dei passeggeri mostrando, per ognuno, la cabina a cui è associato, quando applicabile """
         # TODO
-
-
 
