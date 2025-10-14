@@ -16,7 +16,7 @@ class CabinaAnimali(Cabina):
 
     def maggiorazionePrezzo(self):
         'prezzo finale = prezzo base × (1 + 0.10 × max_animali)'
-        self.prezzoBase *= self.prezzoBase*(1+0.10*self.numAnimali)
+        self.prezzoBase *= (1+0.10*self.numAnimali)
 
         return self.prezzoBase
 
@@ -30,7 +30,7 @@ class CabinaDeluxe(Cabina):
         self.Stile = Stile
     def maggioramentoPrezzo(self):
         'prezzo finale = prezzo base × 1.20'
-        self.prezzoBase *= self.prezzoBase*1.20
+        self.prezzoBase *= 1.20
         return self.prezzoBase
     def __str__(self):
         return f'Codice: {self.codCabina}, Letti: {self.letti}, Prezzo: {self.prezzoBase}, Stile: {self.Stile}, prezzo: {self.prezzoBase}'
