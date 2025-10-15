@@ -9,6 +9,7 @@ class Crociera:
         self.nome = nome
         self.lista_passeggeri = []
         self.listaCabine = []
+        self.assegnazioneCabine = {}
 
 
 
@@ -61,7 +62,36 @@ class Crociera:
 
     def assegna_passeggero_a_cabina(self, codice_cabina, codice_passeggero):
         """Associa una cabina a un passeggero"""
-        # TODO
+        CabinaDaTrovare: Cabina = None
+        PasseggeriDaTrovare = None
+        for c in self.listaCabine:
+            if c.codCabina == codice_cabina:
+                CabinaDaTrovare = c
+                break
+        if CabinaDaTrovare is None:
+            raise Exception("Cabina inesistente")
+        for p in self.lista_passeggeri:
+            if p.CodPasseggeri == codice_passeggero:
+                PasseggeriDaTrovare = p
+                break
+        if PasseggeriDaTrovare is None:
+            raise Exception("Passeggeri inesistente")
+        if CabinaDaTrovare.disponibilita is True:
+            agg_disp = CabinaDaTrovare.gest_disponibilita()
+            if codice_passeggero not in self.assegnazioneCabine.keys():
+                self.assegnazioneCabine[codice_passeggero] = CabinaDaTrovare
+            else:
+                raise Exception("Passeggero gia assegnato")
+
+        else:
+            raise Exception("Cabina occupata")
+        return f"Cabina {codice_cabina} assegnata a passeggero {codice_passeggero}."
+
+
+
+
+
+
 
     def cabine_ordinate_per_prezzo(self):
         """Restituisce la lista ordinata delle cabine in base al prezzo"""

@@ -6,7 +6,9 @@ class Cabina:
         self.prezzoBase = prezzoBase
         self.disponibilita = True
 
-
+    def gest_disponibilita(self):
+        self.disponibilita = False
+        return self.disponibilita
     def __str__(self):
         return f'{self.codCabina}: Cabina Base - {self.letti} letti - Prezzo {self.prezzoBase} - {self.disponibilita}'
 
