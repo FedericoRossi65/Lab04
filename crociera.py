@@ -32,20 +32,21 @@ class Crociera:
                         letti = int(row[1])
                         ponte = int(row[2])
                         prezzoBase = float(row[3])
+                        disponibilita = 'Disponibile'
                         try:
 
 
                             if isinstance(row[4], int):
                                 numAnimali = int(row[4])
 
-                                cab_animali = CabinaAnimali(CodCabina,letti,ponte,prezzoBase, numAnimali)
+                                cab_animali = CabinaAnimali(CodCabina,letti,ponte,prezzoBase, numAnimali,disponibilita)
                                 self.listaCabine.append(cab_animali)
                             elif isinstance(row[4], str):
                                 stile_cabina = row[4]
-                                cabDeluxe = CabinaDeluxe(CodCabina,letti,ponte,prezzoBase, stile_cabina)
+                                cabDeluxe = CabinaDeluxe(CodCabina,letti,ponte,prezzoBase, stile_cabina,disponibilita)
                                 self.listaCabine.append(cabDeluxe)
                         except IndexError:
-                            cab = Cabina(CodCabina, letti, ponte, prezzoBase)
+                            cab = Cabina(CodCabina, letti, ponte, prezzoBase,disponibilita)
                             self.listaCabine.append(cab)
 
 
@@ -63,7 +64,7 @@ class Crociera:
 
     def cabine_ordinate_per_prezzo(self):
         """Restituisce la lista ordinata delle cabine in base al prezzo"""
-        # T
+        return sorted(self.listaCabine, key=lambda cab: cab.prezzoBase, reverse=True)
 
 
     def elenca_passeggeri(self):

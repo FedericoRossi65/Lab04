@@ -4,6 +4,6 @@ class passeggeri:
         self.Nome = Nome
         self.Cognome = Cognome
     def __str__(self):
-        return f'CodicePasseggero: {self.CodPasseggeri}, Nome: {self.Nome}, Cognome: {self.Cognome}'
+        return f'{self.CodPasseggeri} - Nome: {self.Nome} - Cognome: {self.Cognome}'
 
     __repr__ = __str__

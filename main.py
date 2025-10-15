@@ -25,8 +25,7 @@ def main():
             file_path = "dati_crociera.csv"
             try:
                 dati = crociera.carica_file_dati(file_path)
-                for i in dati:
-                    print(i)
+
 
 
                 print("Dati caricati correttamente.")
