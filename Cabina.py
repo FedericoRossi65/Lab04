@@ -1,39 +1,42 @@
 class Cabina:
-    def __init__(self,codCabina,letti,ponte,prezzoBase,disponibilita):
+    def __init__(self,codCabina,letti,ponte,prezzoBase):
         self.codCabina = codCabina
         self.letti = letti
         self.ponte = ponte
         self.prezzoBase = prezzoBase
-        self.disponibilita = disponibilita
+        self.disponibilita = True
+
+
     def __str__(self):
         return f'{self.codCabina}: Cabina Base - {self.letti} letti - Prezzo {self.prezzoBase} - {self.disponibilita}'
 
     __repr__ = __str__
 class CabinaAnimali(Cabina):
-    def __init__(self,codCabina,letti,ponte,prezzoBase,numAnimali,disponibilita):
-        super().__init__(codCabina,letti,ponte,prezzoBase,disponibilita)
+    def __init__(self,codCabina,letti,ponte,prezzoBase,numAnimali):
+        super().__init__(codCabina,letti,ponte,prezzoBase)
         self.numAnimali = numAnimali
 
 
     def maggiorazionePrezzo(self):
         'prezzo finale = prezzo base × (1 + 0.10 × max_animali)'
-        self.prezzoBase *= (1+0.10*self.numAnimali)
+        prezzoMaggiorato = round(self.prezzoBase*(1+(0.10*self.numAnimali)),2)
 
-        return self.prezzoBase
+        return prezzoMaggiorato
     # CAB6: Animali | 4 letti - Ponte 1 - Prezzo 234.00€ - Max animali: 3 – Disponibile
     def __str__(self):
-        return f'{self.codCabina}: Animali | {self.letti} letti - Ponte {self.ponte} - Prezzo {self.prezzoBase} - {self.disponibilita}'
+        return f'{self.codCabina}: Animali | {self.letti} letti - Ponte {self.ponte} - Prezzo {CabinaAnimali.maggiorazionePrezzo(self)} - {self.disponibilita}'
 
     __repr__ = __str__
 class CabinaDeluxe(Cabina):
-    def __init__(self,codCabina,letti,ponte,prezzoBase,Stile,disponibilita):
-        super().__init__(codCabina,letti,ponte,prezzoBase,disponibilita)
+    def __init__(self,codCabina,letti,ponte,prezzoBase,Stile):
+        super().__init__(codCabina,letti,ponte,prezzoBase)
         self.Stile = Stile
-    def maggioramentoPrezzo(self):
+    def maggiorazionePrezzo(self):
         'prezzo finale = prezzo base × 1.20'
-        self.prezzoBase *= 1.20
-        return self.prezzoBase
+        prezzoMaggiorato = round((self.prezzoBase*1.20),2)
+
+        return prezzoMaggiorato
     def __str__(self):
-        return f'{self.codCabina}: {self.Stile} | {self.letti} letti - Prezzo {self.prezzoBase} - Prezzo: {self.prezzoBase} - {self.disponibilita}'
+        return f'{self.codCabina}: {self.Stile} | {self.letti} letti -  Prezzo: {CabinaDeluxe.maggiorazionePrezzo(self)} - {self.disponibilita} '
 
     __repr__ = __str__
