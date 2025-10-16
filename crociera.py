@@ -10,6 +10,8 @@ class Crociera:
         self.lista_passeggeri = []
         self.listaCabine = []
         self.assegnazioneCabine = {}
+        self.elenco_pass = {}
+
 
 
 
@@ -79,17 +81,13 @@ class Crociera:
         if CabinaDaTrovare.disponibilita is True:
             agg_disp = CabinaDaTrovare.gest_disponibilita()
             if codice_passeggero not in self.assegnazioneCabine.keys():
-                self.assegnazioneCabine[codice_passeggero] = CabinaDaTrovare
+                self.assegnazioneCabine[codice_passeggero] = CabinaDaTrovare.codCabina
             else:
                 raise Exception("Passeggero gia assegnato")
 
         else:
             raise Exception("Cabina occupata")
-        return f"Cabina {codice_cabina} assegnata a passeggero {codice_passeggero}."
-
-
-
-
+        return self.assegnazioneCabine
 
 
 
@@ -100,5 +98,13 @@ class Crociera:
 
     def elenca_passeggeri(self):
         """Stampa l'elenco dei passeggeri mostrando, per ognuno, la cabina a cui è associato, quando applicabile """
-        # TODO
+        for passe in self.lista_passeggeri:
+            codice  = passe.CodPasseggeri
+            cabina = self.assegnazioneCabine.get(codice, "Non assegnato")
+            self.assegnazioneCabine[codice] = cabina
+        return self.assegnazioneCabine
+
+
+
+
 
