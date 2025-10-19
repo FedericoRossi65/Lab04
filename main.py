@@ -27,8 +27,7 @@ def main():
             file_path = "dati_crociera.csv"
             try:
                 dati = crociera.carica_file_dati(file_path)
-                for d in dati:
-                    print(d)
+
 
 
 
@@ -40,7 +39,9 @@ def main():
             codice_cabina = input("Codice cabina: ")
             codice_passeggero = input("Codice passeggero: ")
             try:
-                print(crociera.assegna_passeggero_a_cabina(codice_cabina, codice_passeggero))
+                ass = (crociera.assegna_passeggero_a_cabina(codice_cabina, codice_passeggero))
+                for c,v in ass.items():
+                    print(f'{c} | {v}')
                 print("Cabina assegnata con successo.")
             except Exception as e:
                 print(f"Errore: {e}")

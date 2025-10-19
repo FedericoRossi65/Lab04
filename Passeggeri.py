@@ -1,3 +1,4 @@
+# definisco la classe passeggeri
 class passeggeri:
     def __init__(self,CodPasseggeri,Nome,Cognome):
         self.CodPasseggeri = CodPasseggeri
