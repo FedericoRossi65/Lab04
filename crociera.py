@@ -59,29 +59,29 @@ class Crociera:
 
     def assegna_passeggero_a_cabina(self, codice_cabina, codice_passeggero):
         """Associa una cabina a un passeggero"""
-        CabinaDaTrovare: Cabina = None
+        CabinaDaTrovare: Cabina = None  #inizializzo cabinia e passeggero da trovare come none
         PasseggeriDaTrovare = None
         for c in self.listaCabine:
             if c.codCabina == codice_cabina:
-                CabinaDaTrovare = c
+                CabinaDaTrovare = c  # condizione che verifica se la cabina esiste
                 break
         if CabinaDaTrovare is None:
-            raise Exception("Cabina inesistente")
+            raise Exception("Cabina inesistente") # solleva un errore se la cabina non esiste
         for p in self.lista_passeggeri:
-            if p.CodPasseggeri == codice_passeggero:
+            if p.CodPasseggeri == codice_passeggero: #condizione che verifica se il passeggero esiste
                 PasseggeriDaTrovare = p
                 break
         if PasseggeriDaTrovare is None:
-            raise Exception("Passeggeri inesistente")
-        if CabinaDaTrovare.disponibilita is True:
-            agg_disp = CabinaDaTrovare.gest_disponibilita()
-            if codice_passeggero not in self.assegnazioneCabine.keys():
-                self.assegnazioneCabine[codice_passeggero] = CabinaDaTrovare.codCabina
+            raise Exception("Passeggeri inesistente") # solleva un errore se il passeggero non esiste
+        if CabinaDaTrovare.disponibilita is True: # verifica se la cabina è disponibile
+            agg_disp = CabinaDaTrovare.gest_disponibilita() # metodo della classe che aggiorna la disponibilità della cabina
+            if codice_passeggero not in self.assegnazioneCabine.keys():# verifica che il passeggero non sia stato ancora  abbianto a nessuna cabina
+                self.assegnazioneCabine[codice_passeggero] = CabinaDaTrovare.codCabina # aggiunge il passeggero con la sua cabina all'elenco
             else:
-                raise Exception("Passeggero gia assegnato")
+                raise Exception("Passeggero gia assegnato") #solleva un errore se il pass è gia stato abbinato
 
         else:
-            raise Exception("Cabina occupata")
+            raise Exception("Cabina occupata") # solleva errore se la cabina è occupata
         return self.assegnazioneCabine
 
 
